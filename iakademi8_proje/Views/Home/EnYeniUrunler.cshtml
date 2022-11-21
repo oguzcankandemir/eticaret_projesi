@@ -1,0 +1,120 @@
+﻿@model iakademi8_proje.Models.AnaSayfaModel
+
+
+@{
+    ViewBag.Title = "EnYeniUrunler";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li style="font-size:20px;color:#fff5fd;background-color:#e1701a;">
+                                    <span>EN YENİ ÜRÜNLER</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="shop-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="shop--right">
+                    <div class="s-r-sidebar-banar">
+                        <img alt="" src="/Content/urunresimleri/img/shopbannar.jpg">
+                    </div>
+                    <div class="shop-product">
+                        <div class="row">
+                            <div class="singl-shop">
+
+                                <div id="urunler">
+                                    @foreach (var item in Model.enyeniUrunler)
+                                    {
+                                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                            <div class="sp-single">
+                                                <div class="sp-img-area">
+                                                    <img class="first-img" src="/Content/urunresimleri/@item.photopath" alt="" style="height:230px;" />
+                                                    <img class="hover-img" src="/Content/urunresimleri/@item.photopath" alt="" style="height:230px;" />
+                                                    <div class="quick-view-detail">
+                                                        <a href="/Home/detaylar/@item.productID">Detaylar</a>
+                                                    </div>
+                                                    <div class="sp-label-pro sp-label-pro-hot" style="background-color:green;color:white;"> YENİ</div>
+                                                </div>
+                                                <div class="sp-info-area">
+                                                    <h2 class="product-name"><a title="@item.productname" href="/Home/detaylar/@item.productID">@item.productname </a></h2>
+                                                    <p class="all-prices">
+                                                        <span class="sp-price main-price">@item.price TL</span>
+                                                    </p>
+                                                    <div class="sp-button">
+                                                        <div class="s-button">
+                                                            <a href="/Home/Sepet/@item.productID" data-toggle="tooltip" data-placement="top" title="Sepete Ekle" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-shopping-cart"></i> </a>
+                                                        </div>
+                                                        <div class="s-button">
+                                                            <a href="" data-toggle="tooltip" data-placement="top" title="" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-heart-o"></i> </a>
+                                                        </div>
+                                                        <div class="s-button last-b ">
+                                                            <a href="/Home/detaylar/@item.productID" data-toggle="tooltip" data-placement="top" title="Detaylar" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-eye"></i> </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="dahafazla">
+    <div class="s-poraduct-botton">
+        <input type="submit" name="name" value="Daha Fazla Ürün" />
+    </div>
+</div>
+
+<input type="hidden" id="sayfano"  value="0" />
+
+<script>
+    $(document).on("click", "#dahafazla", function () {
+       // alert("Butona tıkladın")
+
+        var sayfano = parseInt($("#sayfano").val())
+        var sonrakisayfam = sayfano + 1;
+      //  alert(sontrakisayfam)
+        $.ajax({
+            type: "GET",
+            url: "/Home/_partial_EnYeniUrunler",
+            data: { sonrakisayfa: sonrakisayfam },
+            async: true,
+            processData: true,
+            cache: true,
+            success: function (result) {
+                // alert(result)
+                $("#urunler").append(result)
+                // sayfano arttır
+                $("#sayfano").val(+sonrakisayfam)
+            }
+        })
+
+    })
+</script>
+
+
+
+
+

@@ -1,0 +1,34 @@
+﻿@model iakademi8_proje.Models.AnaSayfaModel
+
+@foreach (var item in Model.enyeniUrunler)
+{
+    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+        <div class="sp-single">
+            <div class="sp-img-area">
+                <img class="first-img" src="/Content/urunresimleri/@item.photopath" alt="" style="height:230px;" />
+                <img class="hover-img" src="/Content/urunresimleri/@item.photopath" alt="" style="height:230px;" />
+                <div class="quick-view-detail">
+                    <a href="/Home/detaylar/@item.productID">Detaylar</a>
+                </div>
+                <div class="sp-label-pro sp-label-pro-hot" style="background-color:green;color:white;">YENİ</div>
+            </div>
+            <div class="sp-info-area">
+                <h2 class="product-name"><a title="@item.productname" href="/Home/detaylar/@item.productID">@item.productname </a></h2>
+                <p class="all-prices">
+                    <span class="sp-price main-price">@item.price TL</span>
+                </p>
+                <div class="sp-button">
+                    <div class="s-button">
+                        <a href="/Home/Sepet/@item.productID" data-toggle="tooltip" data-placement="top" title="Sepete Ekle" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-shopping-cart"></i> </a>
+                    </div>
+                    <div class="s-button">
+                        <a href="" data-toggle="tooltip" data-placement="top" title="" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-heart-o"></i> </a>
+                    </div>
+                    <div class="s-button last-b ">
+                        <a href="/Home/detaylar/@item.productID" data-toggle="tooltip" data-placement="top" title="Detaylar" class="black-tooltip add-to-cart all_src_icon"> <i class="fa fa-eye"></i> </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

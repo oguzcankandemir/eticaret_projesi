@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "CategoryAdd";
+    Layout = "~/Views/Shared/admin_layout.cshtml";
+
+    IEnumerable<SelectListItem> cl = ViewData["catlist"] as IEnumerable<SelectListItem>;
+}
+
+@using iakademi8_proje.Models
+@model tbl_Categories
+
+<br />
+<br />
+<div class="portlet box blue">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> KATEGORİ GİRİŞ FORMU
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+            <a href="#portlet-config" data-toggle="modal" class="config">
+            </a>
+            <a href="" class="reload">
+            </a>
+            <a href="" class="remove">
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        @*enctype = "multipart/form-data -> ürün resmini , controller gönderirken gereki olan satır"*@
+        @using (Html.BeginForm("CategoryAdd", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+        <div class="form-body">
+            <div class="form-group">
+                <label class="col-md-3 control-label">Ana Kategori Seçiniz</label>
+                <div class="col-md-9">
+                    @Html.DropDownList("categoryID",cl,"Seçiniz", new { @class = "form-control input-lg" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">Kategori Adı</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control input-lg" placeholder="Kategori Adı" name="categoryname">
+                </div>
+            </div>
+        </div>
+            <div class="form-actions right1">
+                <button type="button" class="btn default">İPTAL</button>
+                <button type="submit" class="btn blue">KAYDET</button>
+            </div>
+        }
+    </div>
+</div>

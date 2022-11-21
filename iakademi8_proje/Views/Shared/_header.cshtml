@@ -1,0 +1,165 @@
+﻿ @using iakademi8_proje.Models
+    
+
+<div id="loader-wrapper">
+    <div class="logo"></div>
+    <div id="loader">
+    </div>
+</div>
+<div class="header-top">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-3 col-lg-3">
+                <div class="logo-area" style="background-color:white;">
+                    <a href="@Url.Action("Index","Home")"><img src="~/Content/img/o.kandemir.png" class="logo-default" style="width:200px;background-color:white;"/> </a>
+                    <br />
+                </div>
+                <span style="color:white;font-size:15pt">@Session["email"]</span>
+            </div>
+            <div class="col-sm-12 col-md-9 col-lg-9">
+                <div class="top-nav-area">
+                    <ul>
+                        <li>
+                            <a href="@Url.Action("EnYeniUrunler","Home")">
+                                <i class="fa fa-eject"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                        En Yenİler
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Ozeller","Home")">
+                                <i class="fa fa-angellist"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                       Özeller
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("indirimliUrunler","Home")">
+                                <i class="fa fa-user"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                       Ençok İndİrİm
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Onecikanlar","Home")">
+                                <i class="fa fa-heart-o"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                       Öne Çıkanlar
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("coksatanlar","Home")">
+                                <i class="fa fa-exchange"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                        Çok Satanlar
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("siparislerim","Home")">
+                                <i class="fa fa-key"></i>
+                                <div class="nav-select">
+                                    <div class="text_menu">
+                                       SİparİŞlerİm
+                                    </div>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="@Url.Action("Cart","Home")">
+                                <div class="cart_area">
+                                    <i class="fa fa-shopping-cart"></i>
+                                    <div class="nav-select">
+                                        <div class="text_menu">
+                                           SEPETİM
+                                        </div>
+                                    </div>
+                                </div>
+                            </a>
+                            <div class="cart-sub">
+                                @{
+                                    int urunsayisi = 0;
+                                    int toplamadet = 0;
+                                    decimal toplamprice = 0;
+                                    decimal toplamadet_price_kdvli = 0;
+                                    decimal toplamadet_price_kdvsiz = 0;
+                                    Cls_Siparisler s = new Cls_Siparisler();
+                                    HttpCookie setcookie = Request.Cookies.Get("sepetim");
+                                    List<Cls_Siparisler> sepet_tablo_detay;
+                                    //sepet boşsa
+                                    if (setcookie == null)
+                                    {
+                                        setcookie = new HttpCookie("sepetim");
+                                        s.sepet = "";
+                                        sepet_tablo_detay = null;
+                                    }
+                                    else
+                                    {
+                                        //sepet doluysa
+                                        s.sepet = setcookie.Value.ToString();
+                                        sepet_tablo_detay = s.sepetiyazdir();
+                                    }
+
+                                    if (sepet_tablo_detay == null)
+                                    {
+                                        //sepet boşsa
+                                        <div class="sub-button">
+                                            <a href="">SEPETİNİZ &nbsp; BOŞ</a>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        //sepet doluysa
+                                        foreach (var item in sepet_tablo_detay as List<Cls_Siparisler>)
+                                        {
+                                            toplamadet += item.adet;
+                                            toplamprice += item.price;
+
+
+                                            toplamadet_price_kdvli += (((item.kdv * item.price) / 100) + item.price) * item.adet;
+                                            toplamadet_price_kdvsiz += item.price * item.adet;
+
+                                            urunsayisi++;
+                                        }
+                                        ViewBag.kalem = urunsayisi;
+                                        ViewBag.toplamadet = toplamadet;
+
+                                        ViewBag.sepettutarkdvsiz = Math.Round(toplamadet_price_kdvsiz, 2);
+                                        ViewBag.sepettutarkdvli = Math.Round(toplamadet_price_kdvli, 2);
+
+                                        ViewBag.toplamkdv = Math.Round(toplamadet_price_kdvli, 2) - Math.Round(toplamadet_price_kdvsiz, 2);
+
+                                        <div class="all-cart">
+                                            <p>Çeşit :   <span>@ViewBag.kalem</span> </p>
+                                            <p>Adet :   <span>@ViewBag.toplamadet</span> </p>
+                                            <p>Sepet Tutarı (Kdv Hariç) :<span>@ViewBag.sepettutarkdvsiz TL</span></p>
+                                            <p>Kdv :<span>@ViewBag.toplamkdv TL</span></p>
+                                        </div>
+                                        <h3><span>Toplam : <span>@ViewBag.sepettutarkdvli TL</span></span></h3>
+                                        <div class="sub-button">
+                                            <a href="@Url.Action("Cart","Home")">SEPET &nbsp; SAYFASINA  &nbsp; GİT</a>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

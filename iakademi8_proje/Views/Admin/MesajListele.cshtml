@@ -1,0 +1,71 @@
+﻿@model List<iakademi8_proje.Models.tbl_Messages>
+
+@{
+    ViewBag.Title = "MesajListele";
+    Layout = "~/Views/Shared/admin_layout.cshtml";
+}
+
+<div class="row margin-bottom-20">
+</div>
+<br /><br /><br /><br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-cogs"></i>MESAJLAR
+                </div>
+                <div class="tools">
+                    <a href="javascript:;" class="collapse">
+                    </a>
+                    <a href="#portlet-config" data-toggle="modal" class="config">
+                    </a>
+                    <a href="javascript:;" class="reload">
+                    </a>
+                    <a href="javascript:;" class="remove">
+                    </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                               İSİM
+                            </th>
+                            <th>
+                                EMAİL
+                            </th>
+                            <th class="hidden-480">
+                               BAŞLIK
+                            </th>
+                            <th>
+                                MESAJ
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @item.isim
+                                </td>
+                                <td>
+                                    @item.email
+                                </td>
+                                <td class="hidden-480">
+                                   @item.baslik
+                                </td>
+                                <td>
+                                        @item.mesaj
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "hesabim";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li class="active"><a href="">GİRİŞ YAPINIZ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="checkout-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="all-out-area">
+
+                        <div class="col-sm-12 col-md-3 col-lg-3"></div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="bt-info" style="background-color:#c9c9c9;">
+                                <h3 class="proopc-process-title" style="background-color:black;color:white;"><span class="proopc-step" ></span>GİRİŞ YAPINIZ</h3>
+                                <div class="chek-full-info">
+                                    <div class="inner-wrap">
+                                        <div class="edit-address" >
+                                            <form action="@Url.Action("hesabim","Home")" method="post">
+
+                                                @Html.AntiForgeryToken() @*cross-site saldırılara karşı*@
+
+                                                <div>
+                                                    <div class="inner">
+                                                        <label class="email" style="font-weight:Bold;">E-Mail *</label>
+                                                        <input type="email" name="email" required maxlength="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-group">
+                                                    <div class="inner">
+                                                        <label class="company" style="font-weight:Bold;">Şifre *</label>
+                                                        <input type="password" name="parola" required maxlength="100">
+                                                    </div>
+                                                </div>
+
+                                                @if (ViewBag.Mesaj != null)
+                                                {
+                                                    <div style="background-color:red;color:white;">
+                                                        <span style="font-size:30pt">Login yada Şifreniz yanlıştır.</span>
+                                                    </div>
+                                                }
+
+
+                                                <div class="submit_crt">
+                                                    <a href="@Url.Action("uyeol","Home")" title="Üye Ol">
+                                                        <input type="button" name="name" value="ÜYE OL" class="update_cart" />
+                                                    </a>
+
+                                                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                    <input type="submit" name="name" value="GİRİŞ YAP" class="update_cart" />
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

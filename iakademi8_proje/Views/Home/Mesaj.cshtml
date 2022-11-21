@@ -1,0 +1,62 @@
+﻿
+@{
+    ViewBag.Title = "Mesaj";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-5" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li style="font-size:20px;color:#fff5fd;background-color:#e1701a;">
+                                    <span>MESAJLARINIZI BEKLİYORUZ</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="map-area">
+    <div class="container">
+        <div class="row">
+
+            <div class=""></div>
+
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="clear"></div>
+
+                <div class="row">
+                    <div class="col-sm-12 col-md-2 col-lg-2"></div>
+
+                    <div class="col-sm-12 col-md-8 col-lg-8">
+                        <div class="contact-p">
+                            <form action="/Home/Mesaj" method="post">
+                                <input type="text" placeholder="İsminiz *" name="isim">
+                                <input type="text" placeholder="Email *" name="email">
+                                <input type="text" placeholder="Kanu Başlığı" name="baslik">
+                                <textarea cols="30" rows="10" placeholder="Mesajınız *" name="mesaj"></textarea>
+                                <div class="submit control-group">
+                                    <div class="controls">
+                                        <input type="submit" value="Gönder" class="btn btn-large btn-primary submit">
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

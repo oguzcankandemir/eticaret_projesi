@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Onay";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li style="font-size:20px;color:#fff5fd;background-color:#e1701a;">
+                                    <span>SİPARİŞİNİZ ALINMIŞTIR:SİPARİŞ NUMARANIZ = <span style="background-color:red;">@ViewBag.orderGroupGUID</span> </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

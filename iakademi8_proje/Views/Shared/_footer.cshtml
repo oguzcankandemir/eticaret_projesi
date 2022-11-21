@@ -1,0 +1,186 @@
+﻿
+
+<div class="brand-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="all-p-title">
+                    <h3>MARKALAR</h3>
+                </div>
+            </div>
+            <div class="clear"></div>
+            <div class="all-brand singal-p">
+
+                @foreach (var item in ViewBag.markaListesi)
+                {
+                    <div class="singal_brand">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <a href="/Home/markalar/@item.supplierID"> <img src="~/Content/img/@item.photopath" alt="" style="height:120px;width:200px;" /> </a>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<section id="sp-bottom-1">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-4" id="sp-bottom1">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <h3 class="sp-module-title"><span>Hakkımda</span></h3>
+                        <div class="sp-module-content">
+                            <div class="custom">
+                                <div class="footer-static-content">
+                                    <p>
+                                        10 Mart 1996 Edirne doğumluyum.  Çocukluğumdan beri bilgisayar dillerine ve programlamaya hep ilgi duymuşumdur.
+                                        Sofya Teknik Üniversitesi'nde Bilgisayar Mühendisliği Ve Bilimleri bölümünden mezun oldum. Üniversite yıllarımda birçok  site projesinde yer aldım. Projeler geliştirmeye devam ediyorum.
+                                    </p>
+                                    <div class="f-icon">
+                                        <h3>BENİMLE  &nbsp; İrtİbatta &nbsp; Geçebİlİrsİnİz</h3>
+                                        <ul>
+                                            <li class="first">
+                                                <a href="https://www.linkedin.com/in/o%C4%9Fuzcan-kandemir-4826ab1a0/"><i class="fa fa-linkedin"></i></a>
+                                            </li>
+                                           
+                                           
+                                            <li class="last">
+                                                <a href="https://www.instagram.com/oguzcan.kandemir/"><i class="fa fa-instagram"></i></a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-8" id="sp-bottom2">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <div class="custom">
+                                <div class="row">
+                                    <div class="col-xs-6  col-sm-3 col-md-3">
+                                        <div class="moduletable">
+                                            <h3>BİLGİLENDİRME</h3>
+                                            <ul class="nav menu">
+                                                    <li><a href="@Url.Action("login","Admin")">YÖNETİM PANELİ GİRİŞİ</a></li>
+                                                <li><a href="/Home/EnYeniUrunler">En yeni ürünler</a></li>
+                                                <li><a href="/Home/Ozeller">Özel ürünler</a></li>
+                                                <li><a href="/Home/indirimliUrunler">İndirimli ürünler</a></li>
+                                                <li><a href="/Home/Onecikanlar">Öne çıkanlar</a></li>
+                                                <li><a href="/Home/coksatanlar">Çok satanlar</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1  col-sm-1 col-md-1"></div>
+                                    <div class="col-xs-6  col-sm-3 col-md-3">
+                                        <div class="moduletable">
+                                            <h3>HIZLI ERİŞİM</h3>
+                                            <ul class="nav menu">
+                                                <li><a href="/Home/siparislerim">Siparişlerim</a></li>
+                                                <li><a href="/Home/hesabim">Giriş</a></li>
+                                                <li><a href="/Home/uyeol">Üye ol</a></li>
+                                                <li><a href="/Home/hakkimizda">Hakkımda</a></li>
+                                                <li><a href="/Home/iletisim">İletişim</a></li>
+                                                <li><a href="/Home/mesaj">Mesaj</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-1  col-sm-1 col-md-1"></div>
+                                    <div class="col-xs-4  col-sm-4 col-md-4">
+                                        <div class="moduletable">
+                                            <h3>SİZİN İÇİN</h3>
+                                            <ul class="nav menu">
+                                                <li><a href="/Footer/tedarikci">Tedarikçi olmak istiyorum</a></li>
+                                                <li><a href="/Footer/klavuz">Güvenli alışveriş kılavuzu</a></li>
+                                                <li><a href="/Footer/verikoruma">Kişisel verilerin korunması</a></li>
+                                                <li><a href="/Footer/teslimatnoktasi">Teslimat noktası olmak istiyorum</a></li>
+                                                <li><a href="/Footer/odemesecenekleri">Ödeme seçenekleri</a></li>
+                                                <li><a href="/Footer/bankakampanyalari">Banka kampanyaları</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<section id="sp-bottom-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-4 sp-bottomcontact">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <h3 class="sp-module-title"><span>Bana UlaŞın</span></h3>
+                        <div class="sp-module-content">
+                            <div class="custom">
+                                <div class="t-bottom-content">
+                                    <p class="adress">
+                                        <em class="fa fa-map-marker"></em>
+                                        <span class="ft-content">Pendik / İstanbul</span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6 col-md-4 sp-bottomcontact">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="lattest-blog-bottom singal-p">
+                            <div class="single-botoom-post">
+                                <div class="text-block">
+                                    <div class="info-text">
+                                            <p class="phone">
+                                                <em class="fa fa-phone"></em>
+                                                <span class="ft-content"> 0(530) 393 45 37</span>
+                                            </p>
+                                    </div>
+                                </div>
+                                <div class="text-block">
+                                    <div class="info-text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-4 sp-bottomcontact">
+                <div class="sp-column ">
+                    <div class="sp-module Subscribe-area">
+                        <div class="sp-module-content">
+                            <p class="email">
+                                <em class="fa fa-envelope"></em>
+                                <span class="ft-content">oguzcankandemir@hotmail.com</span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<footer id="sp-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-6 col-md-6">
+                <p>Copyright &copy; 2022 <a href="../../../bootexperts_default.html" target="_blank">oguzcankandemir</a> Tüm Hakları İle Saklıdır</p>
+            </div>
+            <div class="col-sm-6 col-md-6">
+                <div class="payment-logo">
+                    <img src="/Content/img/payment.png" alt="" />
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+

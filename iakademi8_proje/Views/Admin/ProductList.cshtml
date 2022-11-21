@@ -1,0 +1,77 @@
+﻿@model List<iakademi8_proje.Models.WV_aktifurunler>
+
+@{
+    ViewBag.Title = "ProductList";
+    Layout = "~/Views/Shared/admin_layout.cshtml";
+}
+<br /><br /><br />
+<table class="table table-dark table-striped table-bordered">
+    <tr style="background-color:#BEAEE2">
+        <th>ID</th>
+        <th colspan="2">ÜRÜN ADI</th>
+        <th>FİYAT</th>
+        <th>KATEGORİ</th>
+        <th>MARKA</th>
+        <th>STOK</th>
+        <th>İNDİRİM</th>
+        <th>KDV</th>
+        <th>STATÜ</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.productID</td>
+            <td>@item.productname</td>
+            <td><img src="~/Content/urunresimleri/@item.photopath" alt="Alternate Text" style="width:50px;height:50px;"/></td>
+            <td>@item.price</td>
+            <td>@item.categoryname</td>
+            <td>@item.brandname</td>
+            <td>@item.stock</td>
+            <td>@item.discount</td>
+            <td>@item.kdv</td>
+
+
+            <td>
+                @if (item.status == 1)
+                {
+                    <label style="background-color:blue;color:white;">GÜN</label>
+                }
+                else if (item.status == 2)
+                {
+                    <label style="background-color:green;color:white;">SLİDER</label>
+                }
+                else if (item.status == 3)
+                {
+                    <label style="background-color:red;color:white;">ÖZEL</label>
+                }
+                else if (item.status == 4)
+                {
+                    <label style="background-color:magenta;color:white;">FIRSAT</label>
+                }
+                else if (item.status == 5)
+                {
+                    <label style="background-color:#52006A;color:white;">YILDIZ</label>
+                }
+                else if (item.status == 6)
+                {
+                    <label style="background-color:#BEAEE2;color:black;"><b>SÜPER</b></label>
+                }
+                else if (item.status == 7)
+                {
+                    <label style="background-color:#865439;color:white;">DİKKAT</label>
+                }
+                else
+                {
+                    <label style="background-color:black;color:white;">YOK</label>
+                }
+            </td>
+
+            <td><a href="/Admin/UrunGuncelle/@item.productID" class="btn btn-primary">GÜNCELLE</a></td>
+            <td><a href="/Admin/UrunSil/@item.productID" class="btn btn-danger" onclick="return confirm("Kayıt silinsin mi?")">SİL</a></td>
+        </tr>
+    }
+</table>
+

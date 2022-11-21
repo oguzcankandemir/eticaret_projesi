@@ -1,0 +1,94 @@
+﻿@using iakademi8_proje.Models
+@model List<WV_siparislerim>
+
+@{
+    ViewBag.Title = "siparislerim";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li style="font-size:20px;color:#fff5fd;background-color:#e1701a;">
+                                    <span>SİPARİŞLERİM</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="wishlist-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+                <div class="cart-wrapper table-responsive">
+                    <table class="shop_table cart ">
+                        <thead>
+                            <tr>
+                                <th class="product-name">SİPARİŞ NO</th>
+                                <th class="product-price">TARİH</th>
+                                <th class="product-quantity">ÜRÜN ADI</th>
+                                <th class="product-subtotal">ADET</th>
+                                <th class="product-subtotal">FİYAT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{ 
+                                string orderGroupGUID = "";
+                                int count = 0;
+                            }
+
+
+                            @foreach (var item in Model)
+                            {
+                                if (orderGroupGUID != item.orderGroupGUID)
+                                {
+                                    orderGroupGUID = item.orderGroupGUID;
+                                    count = 0;
+                                }
+
+                              
+                            <tr class="cart_item">
+
+                                <td class="product-subtotal">
+                                    @if (orderGroupGUID == item.orderGroupGUID && count == 0)
+                                    {
+                                        <span class="amount">@item.orderGroupGUID</span>
+                                        count++;
+                                    }
+                                </td>
+
+                                <td class="product-subtotal">
+                                    <span class="amount">@item.OrderDate</span>
+                                </td>
+
+                                <td class="product-subtotal">
+                                    <span class="amount">@item.productname</span>
+                                </td>
+
+                                <td class="product-subtotal">
+                                    <span class="amount">@item.quantity</span>
+                                </td>
+
+                                <td class="product-subtotal">
+                                    <span class="amount">@item.price TL</span>
+                                </td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

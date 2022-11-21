@@ -1,0 +1,238 @@
+﻿@using iakademi8_proje.Models
+
+@{
+    ViewBag.Title = "order";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+<div class="col-lg-3 col-md-3 col-sm-3">
+</div>
+
+<div class="col-lg-6 col-md-6 col-sm-6 ">
+    <div class="cart_totals">
+        <h2>TESLİMAT BİLGİLERİNİZ</h2>
+        <div class="total_table">
+            <table class="table-responsive" style="background-color:#f4c7ab">
+                <tbody>
+
+                    @foreach (var item in ViewBag.UyeBilgi as IList<Cls_Users>)
+                    {
+                        <tr class="cart-subtotal">
+                            <th>EMAİL</th>
+                            <td><span class="amount">@item.email</span></td>
+                        </tr>
+                        <tr class="cart-subtotal">
+                            <th>İSİM SOYİSİM</th>
+                            <td><span class="amount">@item.isimsoyisim</span></td>
+                        </tr>
+                        <tr class="cart-subtotal">
+                            <th>TELEFON</th>
+                            <td><span class="amount">@item.telefon</span></td>
+                        </tr>
+                        <tr class="cart-subtotal">
+                            <th>FATURA ADRESİ</th>
+                            <td><span class="amount">@item.faturaadresi</span></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <form action="@Url.Action("order","Home")" method="post">
+
+        <div class="cart_totals">
+            <h2>KREDİ KARTI BİLGİLERİNİZİ GİRİNİZ</h2>
+            <div class="total_table">
+                <table class="table-responsive" style="background-color:#f5a962">
+                    <tbody>
+
+                        <tr class="cart-subtotal">
+                            <th>Kredi Kart No</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" name="creditCardNumber" value="" maxlength="16" required placeholder="Kredi Kart No Giriniz" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr class="cart-subtotal">
+                            <th>Ay</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" name="creditCardMonth" value="" maxlength="2" required placeholder="AY:XX" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr class="cart-subtotal">
+                            <th>Yıl</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" name="creditCardYear" value="" maxlength="2" required placeholder="YIL:XX" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+                        <tr class="cart-subtotal">
+                            <th>CVC</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" name="creditCardCVC" value="" maxlength="3" required placeholder="CVC:XXX" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="cart_totals">
+            <h2>FATURA BİLGİLERİNİZİ GİRİNİZ</h2>
+            <div class="total_table">
+                <table class="table-responsive" style="background-color:#fcdec0">
+                    <tbody>
+
+                        <tr class="cart-subtotal">
+                            <th>Fatura Tipi</th>
+                            <td>
+                                <span class="amount">
+                                    @Html.RadioButton("faturatipi", "rbBireysel", new { value = "rbBireysel", @checked = true }) Bireysel
+                                </span>
+
+                                <span class="amount">
+                                    @Html.RadioButton("faturatipi", "rbKurumsal", new { value = "rbKurumsal" }) Kurumsal
+                                </span>
+                            </td>
+                        </tr>
+
+                        @*  radiobuton bireysel secilirse ,txttckimlikno görünecek *@
+                        <tr class="cart-subtotal" id="tr_tckimlik">
+                            <th>TCKimlik No</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" id="txttckimlikno" name="txttckimlikno" value="" maxlength="11" required placeholder="tckimlikno giriniz" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+                        @Html.AntiForgeryToken()
+
+                        @*  radiobuton kurumsal secilirse ,txtvergino görünecek *@
+                        <tr class="cart-subtotal" id="tr_vergino" style="display:none;">
+                            <th>Vergi No</th>
+                            <td>
+                                <span class="amount">
+                                    <input type="text" id="txtvergino" name="txtvergino" value="" maxlength="10" placeholder="tcvergino giriniz" onkeypress="return numberonly(this, event);" />
+                                </span>
+                            </td>
+                        </tr>
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="cart_totals">
+            <h2>SATIŞ SÖZLEŞMESİ</h2>
+            <div class="total_table">
+                <table class="table-responsive" style="background-color:#fcdec0">
+                    <tbody>
+                        İade edilen mal 2 gün içinde teslim alınabilir.Kırılan ürünlerden şirketimiz sorumlu değildir.
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="cart_totals" id="div_chk_kabulediyorum">
+            <div class="total_table">
+                <strong>
+                    <label>
+                        @Html.CheckBox("chk_kabulediyorum", false)
+                        Yukarıdaki Bilgilendirmeleri Okudum , Sözleşme Şartlarını Kabul Ediyorum.
+                    </label>
+                </strong>
+            </div>
+        </div>
+        <div class="submit_crt" id="div_odemeyap" style="display:none;">
+            <a href="@Url.Action("order","Home")" title="SİPARİŞİ ONAYLA">
+                <input type="submit" class="proceed_chack" value="SİPARİŞİ ONAYLA" />
+            </a>
+        </div>
+
+    </form>
+</div>
+<script>
+    //sadece rakam girilmesi gereken alanı kontrol eden fonksiyon
+    function numberonly(myfield, e, dec) {
+        var key;
+        var keychar;
+
+        if (window.event)
+            key = window.event.keyCode;
+        else if (e)
+            key = e.which;
+        else
+            return true;
+        keychar = String.fromCharCode(key);
+
+        // control keys
+        if ((key == null) || (key == 0) || (key == 8) ||
+            (key == 9) || (key == 13) || (key == 27))
+            return true;
+
+        // numbers
+        else if ((("0123456789").indexOf(keychar) > -1))
+            return true;
+
+        // decimal point jump
+        else if (dec && (keychar == ".")) {
+            myfield.form.elements[dec].focus();
+            alert("Lütfen sadece rakam giriniz.");
+            return false;
+        }
+        else {
+            alert("Lütfen sadece rakam giriniz.");
+            return false;
+        }
+    }
+
+
+    $('input[type=radio][name=faturatipi]').on('change', function () {
+        // alert("degisti")
+        if ($(this).val() == "rbBireysel") {
+           // alert("bireysel")
+            $("#tr_tckimlik").css("display", "block")
+            $("#tr_vergino").css("display", "none")
+            //bireysel alanda tckimlikno girmek zorunlu
+            $("#txttckimlikno").attr("required", "true")
+            //bireysel seçilirse vergino zorunlulugu olmayacak
+            $("#txtvergino").removeAttr("required")
+        }
+        else {
+         //   alert("kurumsal")
+            $("#tr_tckimlik").css("display", "none")
+            $("#tr_vergino").css("display", "block")
+            //kurumsal alanda vergino girmek zorunlu
+            $("#txtvergino").attr("required", "true")
+             //kurumsal seçilirse tckimlikno zorunlulugu olmayacak
+            $("#txttckimlikno").removeAttr("required")
+        }
+    })
+
+
+    $("[type='checkbox'][name=chk_kabulediyorum]").change(function () {
+        // alert("checkbox tıklandı")
+        if ($(this).prop('checked')) {
+           // alert("aktif")
+            $("#div_odemeyap").css("display", "block")
+        }
+        else {
+          //  alert("pasif")
+            $("#div_odemeyap").css("display", "none")
+        }
+    })
+</script>
+
+

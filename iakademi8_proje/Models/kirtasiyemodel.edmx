@@ -1,0 +1,477 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Cetin_KirtasiyeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Categories">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="categoryname" Type="nvarchar" MaxLength="50" />
+          <Property Name="parentID" Type="int" />
+          <Property Name="shortname" Type="nvarchar" MaxLength="50" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" />
+          <Property Name="OrderDate" Type="smalldatetime" />
+          <Property Name="orderGroupGUID" Type="nvarchar" MaxLength="50" />
+          <Property Name="invoiceAdress" Type="nvarchar" MaxLength="50" />
+          <Property Name="ProductID" Type="int" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="urunkodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="productname" Type="nvarchar" MaxLength="100" />
+          <Property Name="price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="categoryID" Type="int" />
+          <Property Name="supplierID" Type="int" />
+          <Property Name="stock" Type="bigint" />
+          <Property Name="discount" Type="int" />
+          <Property Name="status" Type="tinyint" />
+          <Property Name="adddate" Type="datetime" />
+          <Property Name="keywords" Type="nvarchar(max)" />
+          <Property Name="durumu" Type="nvarchar" MaxLength="10" />
+          <Property Name="kdv" Type="int" />
+          <Property Name="onecikanlar" Type="int" />
+          <Property Name="coksatanlar" Type="int" />
+          <Property Name="bunabakanlar_bunadabakti" Type="nvarchar" MaxLength="50" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="photopath" Type="nvarchar(max)" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Suppliers">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brandname" Type="nvarchar" MaxLength="50" />
+          <Property Name="photopath" Type="nvarchar(max)" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="email" Type="nvarchar" MaxLength="50" />
+          <Property Name="parola" Type="nvarchar" MaxLength="50" />
+          <Property Name="isimsoyisim" Type="nvarchar" MaxLength="50" />
+          <Property Name="telefon" Type="nvarchar" MaxLength="50" />
+          <Property Name="faturaadresi" Type="nvarchar(max)" />
+          <Property Name="adminmi" Type="bit" />
+          <Property Name="aktif" Type="bit" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cetin_Kirtasiye.dbo.vw_arama' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="vw_arama">
+          <Key>
+            <PropertyRef Name="KATEGORI" />
+            <PropertyRef Name="URUN" />
+            <PropertyRef Name="MARKA" />
+          </Key>
+          <Property Name="KATEGORI" Type="int" Nullable="false" />
+          <Property Name="URUN" Type="int" Nullable="false" />
+          <Property Name="MARKA" Type="int" Nullable="false" />
+          <Property Name="ARAMAISMI" Type="nvarchar" MaxLength="101" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cetin_Kirtasiye.dbo.WV_aktifurunler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WV_aktifurunler">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productname" Type="nvarchar" MaxLength="100" />
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="status" Type="tinyint" />
+          <Property Name="adddate" Type="datetime" />
+          <Property Name="discount" Type="int" />
+          <Property Name="onecikanlar" Type="int" />
+          <Property Name="coksatanlar" Type="int" />
+          <Property Name="stock" Type="bigint" />
+          <Property Name="notes" Type="nvarchar(max)" />
+          <Property Name="bunabakanlar_bunadabakti" Type="nvarchar" MaxLength="50" />
+          <Property Name="kdv" Type="int" />
+          <Property Name="urunkodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="keywords" Type="nvarchar(max)" />
+          <Property Name="durumu" Type="nvarchar" MaxLength="10" />
+          <Property Name="aktif" Type="bit" />
+          <Property Name="categoryID" Type="int" />
+          <Property Name="photopath" Type="nvarchar(max)" />
+          <Property Name="supplierID" Type="int" />
+          <Property Name="categoryname" Type="nvarchar" MaxLength="50" />
+          <Property Name="shortname" Type="nvarchar" MaxLength="50" />
+          <Property Name="brandname" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Cetin_Kirtasiye.dbo.WV_siparislerim' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="WV_siparislerim">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="int" Nullable="false" />
+          <Property Name="productname" Type="nvarchar" MaxLength="100" />
+          <Property Name="price" Type="decimal" Precision="11" Scale="2" />
+          <Property Name="kdv" Type="int" />
+          <Property Name="OrderDate" Type="smalldatetime" />
+          <Property Name="orderGroupGUID" Type="nvarchar" MaxLength="50" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="userID" Type="int" />
+        </EntityType>
+        <EntityContainer Name="Cetin_KirtasiyeModelStoreContainer">
+          <EntitySet Name="tbl_Categories" EntityType="Self.tbl_Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Orders" EntityType="Self.tbl_Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Suppliers" EntityType="Self.tbl_Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vw_arama" EntityType="Self.vw_arama" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vw_arama].[KATEGORI] AS [KATEGORI], 
+    [vw_arama].[URUN] AS [URUN], 
+    [vw_arama].[MARKA] AS [MARKA], 
+    [vw_arama].[ARAMAISMI] AS [ARAMAISMI]
+    FROM [dbo].[vw_arama] AS [vw_arama]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WV_aktifurunler" EntityType="Self.WV_aktifurunler" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WV_aktifurunler].[productname] AS [productname], 
+    [WV_aktifurunler].[productID] AS [productID], 
+    [WV_aktifurunler].[price] AS [price], 
+    [WV_aktifurunler].[status] AS [status], 
+    [WV_aktifurunler].[adddate] AS [adddate], 
+    [WV_aktifurunler].[discount] AS [discount], 
+    [WV_aktifurunler].[onecikanlar] AS [onecikanlar], 
+    [WV_aktifurunler].[coksatanlar] AS [coksatanlar], 
+    [WV_aktifurunler].[stock] AS [stock], 
+    [WV_aktifurunler].[notes] AS [notes], 
+    [WV_aktifurunler].[bunabakanlar_bunadabakti] AS [bunabakanlar_bunadabakti], 
+    [WV_aktifurunler].[kdv] AS [kdv], 
+    [WV_aktifurunler].[urunkodu] AS [urunkodu], 
+    [WV_aktifurunler].[keywords] AS [keywords], 
+    [WV_aktifurunler].[durumu] AS [durumu], 
+    [WV_aktifurunler].[aktif] AS [aktif], 
+    [WV_aktifurunler].[categoryID] AS [categoryID], 
+    [WV_aktifurunler].[photopath] AS [photopath], 
+    [WV_aktifurunler].[supplierID] AS [supplierID], 
+    [WV_aktifurunler].[categoryname] AS [categoryname], 
+    [WV_aktifurunler].[shortname] AS [shortname], 
+    [WV_aktifurunler].[brandname] AS [brandname]
+    FROM [dbo].[WV_aktifurunler] AS [WV_aktifurunler]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="WV_siparislerim" EntityType="Self.WV_siparislerim" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [WV_siparislerim].[productID] AS [productID], 
+    [WV_siparislerim].[productname] AS [productname], 
+    [WV_siparislerim].[price] AS [price], 
+    [WV_siparislerim].[kdv] AS [kdv], 
+    [WV_siparislerim].[OrderDate] AS [OrderDate], 
+    [WV_siparislerim].[orderGroupGUID] AS [orderGroupGUID], 
+    [WV_siparislerim].[quantity] AS [quantity], 
+    [WV_siparislerim].[userID] AS [userID]
+    FROM [dbo].[WV_siparislerim] AS [WV_siparislerim]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Cetin_KirtasiyeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Categories">
+          <Key>
+            <PropertyRef Name="categoryID" />
+          </Key>
+          <Property Name="categoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="categoryname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parentID" Type="Int32" />
+          <Property Name="shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Orders">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="orderGroupGUID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="invoiceAdress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Products">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="urunkodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="productname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="categoryID" Type="Int32" />
+          <Property Name="supplierID" Type="Int32" />
+          <Property Name="stock" Type="Int64" />
+          <Property Name="discount" Type="Int32" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <Property Name="keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="durumu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="kdv" Type="Int32" />
+          <Property Name="onecikanlar" Type="Int32" />
+          <Property Name="coksatanlar" Type="Int32" />
+          <Property Name="bunabakanlar_bunadabakti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="photopath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Suppliers">
+          <Key>
+            <PropertyRef Name="supplierID" />
+          </Key>
+          <Property Name="supplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brandname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="photopath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="tbl_Users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="parola" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="isimsoyisim" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="telefon" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="faturaadresi" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="adminmi" Type="Boolean" />
+          <Property Name="aktif" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="vw_arama">
+          <Key>
+            <PropertyRef Name="KATEGORI" />
+            <PropertyRef Name="URUN" />
+            <PropertyRef Name="MARKA" />
+          </Key>
+          <Property Name="KATEGORI" Type="Int32" Nullable="false" />
+          <Property Name="URUN" Type="Int32" Nullable="false" />
+          <Property Name="MARKA" Type="Int32" Nullable="false" />
+          <Property Name="ARAMAISMI" Type="String" MaxLength="101" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WV_aktifurunler">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="price" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="status" Type="Byte" />
+          <Property Name="adddate" Type="DateTime" Precision="3" />
+          <Property Name="discount" Type="Int32" />
+          <Property Name="onecikanlar" Type="Int32" />
+          <Property Name="coksatanlar" Type="Int32" />
+          <Property Name="stock" Type="Int64" />
+          <Property Name="notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="bunabakanlar_bunadabakti" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="kdv" Type="Int32" />
+          <Property Name="urunkodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="keywords" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="durumu" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="aktif" Type="Boolean" />
+          <Property Name="categoryID" Type="Int32" />
+          <Property Name="photopath" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="supplierID" Type="Int32" />
+          <Property Name="categoryname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="shortname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="brandname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="WV_siparislerim">
+          <Key>
+            <PropertyRef Name="productID" />
+          </Key>
+          <Property Name="productID" Type="Int32" Nullable="false" />
+          <Property Name="productname" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="price" Type="Decimal" Precision="11" Scale="2" />
+          <Property Name="kdv" Type="Int32" />
+          <Property Name="OrderDate" Type="DateTime" Precision="0" />
+          <Property Name="orderGroupGUID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="userID" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="Cetin_KirtasiyeEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Categories" EntityType="Self.tbl_Categories" />
+          <EntitySet Name="tbl_Orders" EntityType="Self.tbl_Orders" />
+          <EntitySet Name="tbl_Products" EntityType="Self.tbl_Products" />
+          <EntitySet Name="tbl_Suppliers" EntityType="Self.tbl_Suppliers" />
+          <EntitySet Name="tbl_Users" EntityType="Self.tbl_Users" />
+          <EntitySet Name="vw_arama" EntityType="Self.vw_arama" />
+          <EntitySet Name="WV_aktifurunler" EntityType="Self.WV_aktifurunler" />
+          <EntitySet Name="WV_siparislerim" EntityType="Self.WV_siparislerim" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Cetin_KirtasiyeModelStoreContainer" CdmEntityContainer="Cetin_KirtasiyeEntities2">
+          <EntitySetMapping Name="tbl_Categories">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.tbl_Categories">
+              <MappingFragment StoreEntitySet="tbl_Categories">
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="categoryname" ColumnName="categoryname" />
+                <ScalarProperty Name="parentID" ColumnName="parentID" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Orders">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.tbl_Orders">
+              <MappingFragment StoreEntitySet="tbl_Orders">
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="orderGroupGUID" ColumnName="orderGroupGUID" />
+                <ScalarProperty Name="invoiceAdress" ColumnName="invoiceAdress" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Products">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.tbl_Products">
+              <MappingFragment StoreEntitySet="tbl_Products">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="urunkodu" ColumnName="urunkodu" />
+                <ScalarProperty Name="productname" ColumnName="productname" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="durumu" ColumnName="durumu" />
+                <ScalarProperty Name="kdv" ColumnName="kdv" />
+                <ScalarProperty Name="onecikanlar" ColumnName="onecikanlar" />
+                <ScalarProperty Name="coksatanlar" ColumnName="coksatanlar" />
+                <ScalarProperty Name="bunabakanlar_bunadabakti" ColumnName="bunabakanlar_bunadabakti" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="photopath" ColumnName="photopath" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Suppliers">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.tbl_Suppliers">
+              <MappingFragment StoreEntitySet="tbl_Suppliers">
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+                <ScalarProperty Name="brandname" ColumnName="brandname" />
+                <ScalarProperty Name="photopath" ColumnName="photopath" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Users">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.tbl_Users">
+              <MappingFragment StoreEntitySet="tbl_Users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="parola" ColumnName="parola" />
+                <ScalarProperty Name="isimsoyisim" ColumnName="isimsoyisim" />
+                <ScalarProperty Name="telefon" ColumnName="telefon" />
+                <ScalarProperty Name="faturaadresi" ColumnName="faturaadresi" />
+                <ScalarProperty Name="adminmi" ColumnName="adminmi" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vw_arama">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.vw_arama">
+              <MappingFragment StoreEntitySet="vw_arama">
+                <ScalarProperty Name="KATEGORI" ColumnName="KATEGORI" />
+                <ScalarProperty Name="URUN" ColumnName="URUN" />
+                <ScalarProperty Name="MARKA" ColumnName="MARKA" />
+                <ScalarProperty Name="ARAMAISMI" ColumnName="ARAMAISMI" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WV_aktifurunler">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.WV_aktifurunler">
+              <MappingFragment StoreEntitySet="WV_aktifurunler">
+                <ScalarProperty Name="productname" ColumnName="productname" />
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="adddate" ColumnName="adddate" />
+                <ScalarProperty Name="discount" ColumnName="discount" />
+                <ScalarProperty Name="onecikanlar" ColumnName="onecikanlar" />
+                <ScalarProperty Name="coksatanlar" ColumnName="coksatanlar" />
+                <ScalarProperty Name="stock" ColumnName="stock" />
+                <ScalarProperty Name="notes" ColumnName="notes" />
+                <ScalarProperty Name="bunabakanlar_bunadabakti" ColumnName="bunabakanlar_bunadabakti" />
+                <ScalarProperty Name="kdv" ColumnName="kdv" />
+                <ScalarProperty Name="urunkodu" ColumnName="urunkodu" />
+                <ScalarProperty Name="keywords" ColumnName="keywords" />
+                <ScalarProperty Name="durumu" ColumnName="durumu" />
+                <ScalarProperty Name="aktif" ColumnName="aktif" />
+                <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+                <ScalarProperty Name="photopath" ColumnName="photopath" />
+                <ScalarProperty Name="supplierID" ColumnName="supplierID" />
+                <ScalarProperty Name="categoryname" ColumnName="categoryname" />
+                <ScalarProperty Name="shortname" ColumnName="shortname" />
+                <ScalarProperty Name="brandname" ColumnName="brandname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="WV_siparislerim">
+            <EntityTypeMapping TypeName="Cetin_KirtasiyeModel.WV_siparislerim">
+              <MappingFragment StoreEntitySet="WV_siparislerim">
+                <ScalarProperty Name="productID" ColumnName="productID" />
+                <ScalarProperty Name="productname" ColumnName="productname" />
+                <ScalarProperty Name="price" ColumnName="price" />
+                <ScalarProperty Name="kdv" ColumnName="kdv" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="orderGroupGUID" ColumnName="orderGroupGUID" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

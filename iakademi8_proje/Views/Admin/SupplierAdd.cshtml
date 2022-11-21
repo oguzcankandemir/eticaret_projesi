@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "SupplierAdd";
+    Layout = "~/Views/Shared/admin_layout.cshtml";
+}
+
+@using iakademi8_proje.Models
+@model tbl_Suppliers
+
+<br />
+<br />
+<div class="portlet box purple ">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="fa fa-gift"></i> MARKA GİRİŞ FORMU
+        </div>
+        <div class="tools">
+            <a href="" class="collapse">
+            </a>
+            <a href="#portlet-config" data-toggle="modal" class="config">
+            </a>
+            <a href="" class="reload">
+            </a>
+            <a href="" class="remove">
+            </a>
+        </div>
+    </div>
+    <div class="portlet-body form">
+        @*enctype = "multipart/form-data -> ürün resmini , controller gönderirken gereki olan satır"*@
+        @using (Html.BeginForm("SupplierAdd", "Admin", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal", @role = "form" }))
+        {
+            <div class="form-body">
+                <div class="form-group">
+                    <label class="col-md-3 control-label">Marka Adı</label>
+                    <div class="col-md-9">
+                        <input type="text" class="form-control input-lg" placeholder="Marka Adı"  name="brandname">
+                    </div>
+                </div>
+                 <div class="form-group">
+                <label class="col-md-3 control-label">Resim Seçiniz</label>
+                <div class="col-md-9">
+                    <input type="file" class="form-control input-lg" placeholder="Resim Seçiniz" name="fileuploader" required>
+                </div>
+            </div>
+            </div>
+            <div class="form-actions right1">
+                <button type="button" class="btn default">İPTAL</button>
+                <button type="submit" class="btn purple">KAYDET</button>
+            </div>
+        }
+    </div>
+</div>
+

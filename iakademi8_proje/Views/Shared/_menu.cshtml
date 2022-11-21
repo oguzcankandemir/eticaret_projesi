@@ -1,0 +1,208 @@
+﻿@{ 
+    var kategoriListesi = ViewBag.kategoriListesi;
+}
+<div class="main-menu-area ">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-10 col-sm-8 col-md-3 col-lg-3">
+                <div class="menu-cat-area">
+                    <h3 class="nk-module-title"><span>KATEGORİLER</span></h3>
+                    <div class="nk-all-items">
+                        <div class="sp-module-content">
+                            <div class="vina-treeview-virtuemart" id="vina-treeview-virtuemart93">
+                                <ul class="level0 treeview">
+                                    @foreach (var item in kategoriListesi)
+                                    {
+                                        if (item.parentID == 0)
+                                        {
+                                            //ana kategori
+                                            <li>
+                                                <a title="@item.categoryname" href="@Url.Action("kategoriler/" + item.categoryID , "Home")" class="baby">
+                                                    <span class="catTitle ">@item.categoryname</span>
+                                                </a>
+                                                @foreach (var subitem in kategoriListesi)
+                                                {
+                                                    if (item.categoryID == subitem.parentID)
+                                                    {
+                                                        //alt kategori
+                                                        <ul class="sub-menu treeview">
+                                                            <li class="expandable">
+                                                                <a title="@subitem.categoryname" href="@Url.Action("kategoriler/" + subitem.categoryID,"Home")" class="">
+                                                                    <span class="catTitle ">@subitem.categoryname</span>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    }
+                                                }
+                                            </li>
+                                        }
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-2 col-sm-3 col-md-9 col-lg-9">
+                <nav>
+                    <ul>
+                        <li><a href="@Url.Action("Index","Home")">ANASAYFA</a></li>
+                        <li class="active">
+                            <a href="">BANA ÖZEL</a>
+                            <div class="sp-dropdown-inner">
+                                <ul class="sp-dropdown-items">
+                                    <li class="sp-menu-item"><a href="@Url.Action("siparislerim","Home")">SİPARİŞLERİM</a></li>
+                                    <li class="sp-menu-item"><a href="@Url.Action("Cart","Home")">SEPETİM</a></li>
+
+                                    @if (Session["adminmi"] != null)
+                                    {
+                                        <li class="sp-menu-item"><a href="@Url.Action("login","Admin")">YÖNETİM PANELİ GİRİŞİ</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="@Url.Action("detayliarama","Home")">DETAYLI ARAMA</a></li>
+                        <li><a href="@Url.Action("hesabim","Home")">GİRİŞ</a></li>
+                        <li><a href="@Url.Action("uyeol","Home")">ÜYE OL</a></li>
+                        <li><a href="@Url.Action("logout","Home")">ÇIKIŞ</a></li>
+                        <li><a href="@Url.Action("hakkimizda","Home")">HAKKIMDA</a></li>
+                        <li><a href="@Url.Action("iletisim","Home")">İLETİŞİM</a></li>
+                        <li><a href="@Url.Action("mesaj","Home")">MESAJ</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="mobile-menu-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="mobile-menu">
+                    <nav id="dropdown">
+                        <ul>
+                            <li>
+                                <a href="@Url.Action("Index","Home")">ANASAYFA</a>
+                                <ul>
+                                    <li><a href="index.html">Home 1</a></li>
+                                    <li><a href="index-2.html">Home 2</a></li>
+                                    <li><a href="index-3.html">Home 3</a></li>
+                                    <li><a href="index-4.html">Home 4</a></li>
+                                    <li><a href="index-5.html">Home 5</a></li>
+                                    <li><a href="index-6.html">Home 6</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="@Url.Action("hakkimizda","Home")">HAKKIMDA</a></li>
+                            
+                            <li><a href="@Url.Action("uyeol","Home")">ÜYE OL</a></li>
+                            <li>
+                                <a href="@Url.Action("iletisim","Home")">İLETİŞİM</a>
+                            </li>
+                            <li><a href="@Url.Action("Mesaj","Home")">MESAJ</a></li>
+                            <li><a href="@Url.Action("cart","Home")">SEPETİM</a></li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="nk-search-area">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-0 col-sm-0 col-md-4 col-lg-4">
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
+                <div class="nk-search">
+                    <div class="search_input">
+                        <input lang="tr" id="search" name="search" type="text" placeholder="Ürün,Kategori,Marka ara" style="width:760px;" />
+                        <br />
+
+                        <div id="dv" style="width:770px;height:auto;margin-top:20px;border-style:solid;background-color:white;border-color:#f47e1e ;z-index:10000;position:absolute;">
+                            <ul id="sul"></ul>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    /* kategoriler ana sayfada açık gelsin, diger sayfalarda kapalı gelsin*/
+
+    function getCurrentFileName() {
+        var pagePathName = window.location.pathname; //URL bilgisini alır
+
+        if (pagePathName == "/Home/Index") {
+            pagePathName = "";
+        }
+
+        return pagePathName.substring(pagePathName.lastIndexOf("/") + 1);
+
+       // alert(pagePathName)
+    }
+
+    if (getCurrentFileName() == "") {
+       // alert("Ana Sayfa")
+        $(".nk-all-items").css("display","block")
+    }
+    else {
+        //  alert("Alt Sayfa")
+        $(".nk-all-items").css("display","none")
+    }
+
+    $("#search").keyup(function () {
+       // alert("bastın")
+        var id = $("#search").val()
+      //  alert(id)
+        var ikat = 0;
+        var imar = 0;
+        var iurun = 0;
+
+        if (id.length> 1) {
+           // alert(id)
+            $.ajax({
+                url: '/Home/urunlerstring/' + id,
+                type: 'POST',
+                ContentType: "application/json;charset=UTF-8",
+                success: function (result) {
+                    $("#sul").remove();
+                    $("#dv").append("<ul id='sul'>")
+                    $.each(result, function (key, value) {
+
+                        if (value.KATEGORI != 0) {
+                            if (ikat == 0) {
+                                $("#sul").append("<li><hr></li>");
+                                $("#sul").append("<li><b>KATEGORİLER</b></li>");
+                                ikat++;
+                            }
+                            $("#sul").append("<li><a href='/Home/kategoriler/" + value.KATEGORI + "'>" + value.ARAMAISMI + "</a></li>");
+                        }
+
+                        if (value.MARKA != 0) {
+                            if (imar == 0) {
+                                $("#sul").append("<li><hr></li>");
+                                $("#sul").append("<li><b>MARKALAR</b></li>");
+                                imar++;
+                            }
+                            $("#sul").append("<li><a href='/Home/markalar/" + value.MARKA + "'>" + value.ARAMAISMI + "</a></li>");
+                        }
+
+                        if (value.URUN != 0) {
+                            if (iurun == 0) {
+                                $("#sul").append("<li><hr></li>");
+                                $("#sul").append("<li><b>ÜRÜNLER</b></li>");
+                                iurun++;
+                            }
+                            $("#sul").append("<li><a href='/Home/detaylar/" + value.URUN + "'>" + value.ARAMAISMI + "</a></li>");
+                        }
+                    })
+                }
+            })
+        }
+        else {
+            $("#sul").remove();
+        }
+    }) 
+</script>

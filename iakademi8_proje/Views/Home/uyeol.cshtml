@@ -1,0 +1,96 @@
+﻿
+@{
+    ViewBag.Title = "uyeol";
+    Layout = "~/Views/Shared/default_layout.cshtml";
+}
+
+
+<div id="sp-breadcrumb-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12" id="sp-breadcrumb">
+                <div class="sp-column ">
+                    <div class="sp-module ">
+                        <div class="sp-module-content">
+                            <ul class="breadcrumb">
+                                <li class="active"><a href="">ÜYE BİLGİLERİNİZİ GİRİNİZ</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="checkout-wrapper">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="row">
+                    <div class="all-out-area">
+
+                        <div class="col-sm-12 col-md-3 col-lg-3"></div>
+
+                        <div class="col-sm-12 col-md-6 col-lg-6">
+                            <div class="bt-info" style="background-color:#c9c9c9;">
+                                <h3 class="proopc-process-title" style="background-color:black;color:white;"><span class="proopc-step"></span>ÜYELİK BİLGİLERİ</h3>
+                                <div class="chek-full-info">
+                                    <div class="inner-wrap">
+                                        <div class="edit-address">
+                                            <form action="@Url.Action("uyeol","Home")" method="post">
+
+                                                @Html.AntiForgeryToken() @*cross-site saldırılara karşı*@
+
+                                                <div>
+                                                    <div class="inner">
+                                                        <label class="email" style="font-weight:Bold;">E-Mail *</label>
+                                                        <input type="email" name="email" required maxlength="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-group">
+                                                    <div class="inner">
+                                                        <label class="company" style="font-weight:Bold;">Şifre *</label>
+                                                        <input type="password" name="parola" required maxlength="100">
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-group">
+                                                    <div class="inner">
+                                                        <label class="company" style="font-weight:Bold;">İsim Soyisim *</label>
+                                                        <input type="text" name="isimsoyisim" required maxlength="50">
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-group">
+                                                    <div class="inner">
+                                                        <label class="company" style="font-weight:Bold;">Telefon *</label>
+                                                        <input type="text" name="telefon" required maxlength="10">
+                                                    </div>
+                                                </div>
+
+                                                <div class="company-group">
+                                                    <div class="inner">
+                                                        <label class="company" style="font-weight:Bold;">Fatura Adresi *</label>
+                                                        <textarea name="faturaadresi" cols="84" rows="4" required></textarea>
+                                                    </div>
+                                                </div>
+
+
+                                                <div class="submit_crt">
+                                                    <input type="submit" name="name" value="Kayıt Ol" class="update_cart" />
+                                                </div>
+
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
